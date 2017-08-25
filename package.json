@@ -1,0 +1,33 @@
+{
+  "name": "migrace-cli",
+  "version": "0.0.1",
+  "description": "Migrace command-line interface",
+  "main": "index.js",
+  "bin": {
+    "migrace": "bin/migrace"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/migrace/migrace-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/migrace/migrace-cli/issues"
+  },
+  "homepage": "https://github.com/migrace/migrace-cli#readme",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "cli-table2": "^0.2.0",
+    "fs-extra": "^4.0.1",
+    "string-width": "^2.1.1",
+    "vorpal": "^1.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0"
+  }
+}

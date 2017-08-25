@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const Vorpal = require('vorpal');
+const { green } = require('chalk');
+
+const loadCommands = require('../lib/loadCommands');
+
+const { IS_INTERACTIVE, PROJECT_NAME } = require('../lib/constants');
+
+const vorpal = new Vorpal();
+
+loadCommands(vorpal).then(() => {
+  if (IS_INTERACTIVE) {
+    vorpal.delimiter(green(
+      PROJECT_NAME
+        ? `migrace:~ ${ PROJECT_NAME }$`
+        : 'migrace~$'
+    ));
+
+    if (PROJECT_NAME) {
+      vorpal.history(`__migrace-history-${ PROJECT_NAME }__`);
+    }
+
+    vorpal.show();
+  } else {
+    vorpal.parse(process.argv);
+  }
+}, (err) => {
+  console.log(err);
+
+  process.exit(1);
+});
