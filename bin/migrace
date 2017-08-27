@@ -5,28 +5,27 @@ const { green } = require('chalk');
 
 const loadCommands = require('../lib/loadCommands');
 
-const { IS_INTERACTIVE, PROJECT_NAME } = require('../lib/constants');
+const {
+  IS_INTERACTIVE,
+  PROJECT_NAME
+} = require('../lib/constants');
 
 const vorpal = new Vorpal();
 
-loadCommands(vorpal).then(() => {
-  if (IS_INTERACTIVE) {
-    vorpal.delimiter(green(
-      PROJECT_NAME
-        ? `migrace:~ ${ PROJECT_NAME }$`
-        : 'migrace~$'
-    ));
+loadCommands(vorpal);
 
-    if (PROJECT_NAME) {
-      vorpal.history(`__migrace-history-${ PROJECT_NAME }__`);
-    }
+if (IS_INTERACTIVE) {
+  vorpal.delimiter(green(
+    PROJECT_NAME
+      ? `migrace:~ ${ PROJECT_NAME }$`
+      : 'migrace~$'
+  ));
 
-    vorpal.show();
-  } else {
-    vorpal.parse(process.argv);
+  if (PROJECT_NAME) {
+    vorpal.history(`__migrace-history-${ PROJECT_NAME }__`);
   }
-}, (err) => {
-  console.log(err);
 
-  process.exit(1);
-});
+  vorpal.show();
+} else {
+  vorpal.parse(process.argv);
+}
